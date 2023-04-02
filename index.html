@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div style="width: auto;">
+<h1> Web push notification example!</h1>
+
+    </div>
+
+    <div>
+        <button onclick="getPushNotification()"> Get Push Notification  </button>
+    </div>
+
+    <script>
+        addEventListener('load',async()=>{
+
+            let sw= await navigator.serviceWorker.register('./serviceWorker.js')
+
+            console.log('sw is okay',sw)
+        })
+
+        async function getPushNotification(){
+
+            let sw= await navigator.serviceWorker.ready;
+
+            let push = await sw.pushManager.subscribe({
+                userVisibleOnly:true,
+                applicationServerKey:'BBS37FdSvWlWtgPPcg96okvf3-aukld6epbq3Ufyfvhb54jx_m-QH07Hh-rcZEnrc6zoniftmIxuQIBS3Fu3Itk'
+            })
+
+            console.log("push notification is: ",JSON.stringify(push))
+        }
+    </script>
+    
+</body>
+</html>
